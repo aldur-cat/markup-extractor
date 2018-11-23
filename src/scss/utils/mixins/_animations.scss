@@ -1,0 +1,74 @@
+/// 회전
+@mixin ani-spin-around($name: '', $min: 0deg, $max: 359deg) {
+  @keyframes spin-around#{if($name == '', '', '-' + $name)} {
+    from {
+      transform: rotate($min);
+    }
+    to {
+      transform: rotate($max);
+    }
+  }
+}
+
+/// 까딱까딱
+@mixin ani-bob($name: '', $min: -10deg, $max: 10deg) {
+  @keyframes bob#{if($name == '', '', '-' + $name)} {
+    0% {
+      transform: rotate($max);
+    }
+    50% {
+      transform: rotate($min);
+    }
+    100% {
+      transform: rotate($max);
+    }
+  }
+}
+
+/// 뿜뿜
+@mixin ani-palpitating($name: '', $min: .98, $max: 1.02) {
+  @keyframes palpitating#{if($name == '', '', '-' + $name)} {
+    0% {
+      transform: scale($min);
+    }
+    50% {
+      transform: scale($max);
+    }
+    100% {
+      transform: scale($min);
+    }
+  }  
+}
+
+/// 뷰들뷰들
+@mixin ani-tremblingly($name: '', $min: -5px, $max: 5px) {
+  @keyframes tremblingly#{if($name == '', '', '-' + $name)} {
+    0% {
+      transform: translateX(0);
+    }
+    20% {
+      transform: translateX(0);
+    }
+    30% {
+      transform: translateX($min);
+    }
+    40% {
+      transform: translateX($max);
+    }
+    50% {
+      transform: translateX($min);
+    }
+    60% {
+      transform: translateX($max);
+    }
+    70% {
+      transform: translateX($min);
+    }
+    80% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+}

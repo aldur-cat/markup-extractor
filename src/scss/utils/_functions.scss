@@ -1,0 +1,13 @@
+/// 숫자 필터
+@function get-value($n) {
+  @return $n / ($n * 0 + 1);
+}
+
+/// rem-to-pixel
+@function rem-to-pixel($rem) {
+  @if (unit($rem) == 'rem') {
+    @return (get-value($rem) * get-value($size-base)) + 0px;
+  } @else {
+    @return $rem;
+  } 
+}

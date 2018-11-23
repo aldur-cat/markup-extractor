@@ -1,0 +1,20 @@
+/// 기본 폰트 설정 덮어쓰기
+$family-sans-serif: 'Noto Sans KR';
+$size-base: 16px;
+
+/// 레이아웃 높이값 설정
+$header-height: 3.5rem;
+$footer-height: 3.5rem;
+$ad-height: 0;
+$container-height: calc(100vh - #{$ad-height});
+// $container-height: calc(100vh - #{$header-height} - #{$footer-height});
+
+/// 색상별 칼라값
+$dust-color1-0: #2DA4FF;
+$dust-color2-0: #11B773;
+$dust-color3-0: #EDAA08;
+$dust-color4-0: #FF4243;
+$dust-color1-1: ($dust-color1-0 + $dust-color2-0) / 2;
+$dust-color2-1: ($dust-color2-0 + $dust-color3-0) / 2;
+$dust-color3-1: ($dust-color3-0 + $dust-color4-0) / 2;
+$dust-color4-1: #000;

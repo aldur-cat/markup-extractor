@@ -1,3 +1,4 @@
+### git hub node ignore
 # Logs
 logs
 *.log
@@ -59,3 +60,8 @@ typings/
 
 # next.js build output
 .next
+
+### 추가
+.vscode
+__markup-result__
+js-dev

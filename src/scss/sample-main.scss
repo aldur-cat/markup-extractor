@@ -1,0 +1,32 @@
+@import './utils/all';
+@import './base/all';
+
+
+
+/// file-loader 테스트용 샘플 코드
+@font-face{
+	font-family: 'Noto Sans KR';
+	font-style: normal;
+	font-weight: 400;
+	src: url('../fonts/NotoSansKR-Regular.woff2') format('woff2')
+}
+
+.img {
+  width: 200px;
+  height: 200px;
+}
+
+.jpg {
+  background: url('../images/profile/img_sample_jpg.jpg')
+}
+
+.png {
+  background: url('../images/img_sample_png.png')
+}
+
+.gif {
+}
+
+.svg {
+  background: url('../images/img_sample_svg.svg')
+}
