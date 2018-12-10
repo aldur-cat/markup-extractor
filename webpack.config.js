@@ -7,7 +7,6 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { HtmlWebpackPluginList } = require('./config/html-webpack-plugin.config.js');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 /**
  * 프로젝트 각종 폴더 경로 설정
@@ -29,26 +28,20 @@ module.exports = (env, options) => {
   const isDevEnv = options.mode !== 'production';
   const config = {
     mode: 'none',
+    devtool: 'cheap-module-eval-source-map',
     entry: {
-      'sample-main-page': path.resolve(assetsBasePath, 'scss','sample-main.scss'),
-      'sample-sub-page': path.resolve(assetsBasePath, 'scss', 'sample-sub.scss'),
-      'sample-sub-page2': path.resolve(assetsBasePath, 'scss', 'sample-sub.scss')
+      'test': path.resolve(assetsBasePath, 'scss','test.scss')
     },
     output: {
       path: outputBasePath,
       filename: isDevEnv ? `./js-dev/[name].js` : `../js-dev/[name].js`,
       publicPath: isDevEnv ? '/' : ''
     },
-    optimization: {
-      minimizer: [
-        // new OptimizeCSSAssetsPlugin({})  // minify 결과물을 원한다면 주석 제거
-      ]
-    },
     plugins: [
-      new CleanWebpackPlugin([
+      !isDevEnv ? new CleanWebpackPlugin([
         BUNDLE_OUTPUT_FOLDER, 
         BUNDLE_SCRIPT_FOLDER
-      ]),
+      ]) : new CleanWebpackPlugin([]),
       new CopyWebpackPlugin([
         {
           from: path.resolve(__dirname, STATIC_COPY_FOLDER),
@@ -67,20 +60,35 @@ module.exports = (env, options) => {
         {
           test: /\.(sa|sc|c)ss$/,
           use: [
-            isDevEnv ? 'style-loader' : { 
+            isDevEnv ? { 
+              loader: 'style-loader',
+              options: {
+                sourceMap: true
+              }
+            } : { 
               loader: MiniCssExtractPlugin.loader, 
               options: { 
-                publicPath: '../' 
+                publicPath: '../'
               } 
             },
             { 
               loader: 'css-loader', 
               options: { 
-                sourceMap: true 
+                sourceMap: true
               } 
             },
-            'postcss-loader',
-            'sass-loader'
+            { 
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: true
+              }
+            },
+            { 
+              loader: 'sass-loader',
+              options: {
+                sourceMap: true
+              }
+            }
           ]
         },
         {
@@ -98,21 +106,29 @@ module.exports = (env, options) => {
         },
         {
           test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)?$/,
-          loader: 'url-loader',
-          options: {
-            name: '[name].[ext]?[hash:7]',
-            outputPath: 'media/',
-            limit: 10000
-          }
+          use: [
+            {
+              loader: 'url-loader',
+              options: {
+                name: '[name].[ext]?[hash:7]',
+                outputPath: 'media/',
+                limit: 10000
+              }
+            }
+          ]
         },
         {
           test: /\.(woff2?|eot|ttf|otf)$/,
-          loader: 'url-loader',
-          options: {
-            name: '[name].[ext]?[hash:7]',
-            outputPath: 'fonts/',
-            limit: 10000
-          }
+          use: [
+            {
+              loader: 'url-loader',
+              options: {
+                name: '[name].[ext]?[hash:7]',
+                outputPath: 'fonts/',
+                limit: 10000
+              }
+            }
+          ]
         }
       ]
     }

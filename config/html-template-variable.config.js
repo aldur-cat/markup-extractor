@@ -1,6 +1,4 @@
 module.exports = (htmlWebpackPlugin) => {
-  // const htmlFileName = htmlWebpackPlugin.options.filename;
-  // const outputName = htmlFileName.substring(0, htmlFileName.lastIndexOf('.'));
   const arrChunkNames = htmlWebpackPlugin.options.chunks;
   const isDevEnv = process.env.NODE_ENV !== 'production';
   let injectTags = ``

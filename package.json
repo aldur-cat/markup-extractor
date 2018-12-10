@@ -4,8 +4,8 @@
   "description": "마크업 정적 파일 추출기",
   "private": true,
   "scripts": {
-    "build": "webpack --hide-modules --progress --mode production",
-    "dev": "webpack-dev-server --open --progress --mode development"
+    "build": "cross-env NODE_ENV=development webpack --hide-modules --progress --mode production",
+    "dev": "cross-env NODE_ENV=production webpack-dev-server --open --progress --mode development"
   },
   "keywords": [
     "markup",
@@ -22,12 +22,13 @@
     "clean-webpack-plugin": "^1.0.0",
     "copy-webpack-plugin": "^4.6.0",
     "cross-env": "^5.2.0",
+    "css-declaration-sorter": "^4.0.1",
     "css-loader": "^1.0.1",
+    "cssnano": "^4.1.7",
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.4",
     "node-sass": "^4.10.0",
-    "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-loader": "^3.0.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",

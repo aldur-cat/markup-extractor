@@ -12,7 +12,7 @@
   }
 }
 
-/// 모바일 화면 + 그 이상일 경우
+/// 모바일 화면 까지 (landscape 기준까지)
 @mixin mobile {
   @media screen and (max-width: $tablet - 1px) {
     @content; 

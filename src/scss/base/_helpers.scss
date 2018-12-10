@@ -8,6 +8,11 @@
   display: none !important;
 }
 
+/// 노출 처리
+.is-showed {
+  display: block !important;
+}
+
 /// floating clear
 .is-clearfix {
   @include clearfix;

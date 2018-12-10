@@ -1,0 +1,45 @@
+<% const { injectTags } = require('./config/html-template-variable.config.js')(htmlWebpackPlugin); %>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Markup Extractor</title>
+  <%= injectTags %>
+</head>
+<body>
+  <main>
+    <header class="header">
+      <h1>Markup Extractor</h1>
+    </header>
+    <div class="container">
+      <h2>마크업 추출기는 하드코딩하는 CSS 파일을 패키지형태로 관리&amp;추출 해주는 마크업 프레임워크입니다.</h2>
+      <p><img src="<%= require('./src/images/img_aldur-cat.jpg') %>" alt="미역이"></p>
+      <p class="linked-list">
+        <a href="https://github.com/aldur-cat/markup-extractor">
+          <svg height="30" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="30" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+          Github
+        </a>
+      </p>
+      <p>하드코딩하여 마크업 프로젝트를 관리하고 구성하고 있다면 활용해보세요.</p>
+      <p>
+        (SA/SC/C)SS를 지원하며 postcss기능을 통해 autoprefix, cssnano, css-declaration-sorter등의 기능을 사용할 수 있습니다.<br>
+        html-webpack-plugin을 통해 템플릿 html파일을 관리하나 프런트개발에 익숙치 않은 웹퍼블리셔를 위해 템플릿 언어의 사용은 최소화 하도록 구성되어있습니다.
+      </p>
+      <p>필요한 추가 패키지 구성하여 입맛에 맞게 변경해 사용하시면 됩니다.</p>
+      <p><strong>추출되어 나오는 결과물이 마크업 정적 페이지입니다.</strong></p>
+    </div>
+    <footer class="footer">
+      <div class="contact">문의: <a href="mailto:aldur.developer@gmail.com">aldur.developer@gmail.com</a></div>
+    </footer>
+  </main>
+  
+  <script>
+    'use strict';
+    (function() {
+      console.log('test');
+    }());
+  </script>
+</body>
+</html>

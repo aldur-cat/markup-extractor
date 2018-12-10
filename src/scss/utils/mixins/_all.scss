@@ -1,59 +1,8 @@
 @charset 'utf-8';
 
 @import './animations.scss';
-@import './elements.scss';
 @import './icons.scss';
 @import './media.scss';
-
-/// Fixed Header
-@mixin fixed-header($top: 0, $height: 48px, $font-size: 22px) {
-  overflow: hidden;
-  position: fixed;
-  top: $top;
-  left: 0;
-  z-index: 100;
-  box-sizing: border-box;
-  width: 100%;
-  height: $height;
-  line-height: $height;
-  text-align: center;
-  font-size: $font-size;
-  font-weight: bold;
-  text-align: center;
-  &__title {
-    @include ellipsis;
-  }
-  &.is-scrolling {
-    @include box-shadow;
-  }
-}
-
-/// flex-box
-@mixin flex-box($display: flex, $flex-direction: row, $flex-wrap: nowrap, $justify-content: flex-start, $align-items: flex-start, $align-content: stretch, $order: 0, $flex: 1 1 auto, $align-self: auto) {
-  display: $display;
-  flex-direction: $flex-direction;
-  flex-wrap: $flex-wrap;
-  justify-content: $justify-content;
-  align-items: $align-items;
-  align-content: $align-content;
-  &__items {
-    position: relative;
-    order: $order;
-    flex: $flex;
-    align-self: $align-self;
-    text-align: center;
-  }
-}
-
-/// box-shadow
-@mixin box-shadow($h-offset: 0px, $v-offset: 3px, $blur: 5px, $spread: 0px, $color: rgba(0,0,0,.1)) {
-  box-shadow: $h-offset $v-offset $blur $spread $color;
-}
-
-/// text-shadow
-@mixin text-shadow($h-shadow: 2px, $v-shadow: 2px, $blur-radius: 0, $color: rgba(0,0,0,.1)) {
-  text-shadow: $h-shadow $v-shadow $blur-radius $color;
-}
 
 /// floating 해제
 @mixin clearfix {
@@ -68,6 +17,7 @@
 @mixin ellipsis($line-clamp: 1) {
   @if($line-clamp == 1) {
     display: block;
+    white-space: nowrap;
   } @else {
     display: -webkit-box;
     -webkit-line-clamp: $line-clamp;
@@ -75,7 +25,6 @@
   }
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 /// 텍스트 숨김처리
@@ -108,4 +57,59 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+/// position absolute
+@mixin pos-absolute ($top: 0, $right: auto, $bottom: auto, $left: 0) {
+  position: absolute;
+  @if ($top != auto) {
+    top: $top;
+  }
+  @if ($right != auto) {
+    right: $right;
+  }
+  @if ($bottom != auto) {
+    bottom: $bottom;
+  }
+  @if ($left != auto) {
+    left: $left;
+  }
+}
+
+/// 가로 스크롤
+@mixin horizontal-scroll ($type: default, $height: auto) {
+  $non-scroll-margin: 50px;
+
+  @if ($type == flex) {
+    display: flex;
+    flex-wrap: nowrap;
+    & > * {
+      flex: 0 0 auto;
+    }
+  } @else {
+    white-space: nowrap;
+    line-height: 0;
+    font-size: 0;
+    & > * {
+      display: inline-block;
+      vertical-align: top;
+      line-height: normal;
+      font-size: medium;
+    }
+  }
+  overflow: hidden;
+  overflow-x: auto;
+  margin-bottom: -$non-scroll-margin;
+  padding-bottom: $non-scroll-margin;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  &::-webkit-scrollbar {
+    display: none; 
+  }
+}
+
+/// 배경 이미지 기본 셋팅
+@mixin init-spr-bg ($spr-image-url: '', $spr-image-size: auto) {
+  background: url($spr-image-url) 999px 0 no-repeat;
+  background-size: $spr-image-size;
 }
