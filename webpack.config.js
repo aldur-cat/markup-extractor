@@ -30,7 +30,7 @@ module.exports = (env, options) => {
     mode: 'none',
     devtool: 'cheap-module-eval-source-map',
     entry: {
-      'test': path.resolve(assetsBasePath, 'scss','test.scss')
+      'sample': path.resolve(assetsBasePath, 'scss','sample.scss')
     },
     output: {
       path: outputBasePath,
