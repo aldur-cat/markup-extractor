@@ -1,0 +1,73 @@
+@charset 'utf-8';
+
+/// util 기능 활용
+@import './utils/all';
+
+/// 기본 설정
+@import './base/all';
+
+$header-height: 50px;
+$footer-height: 50px;
+$container-height: calc(100vh - #{$header-height} - #{$footer-height});
+
+body {
+  font-family: $font-family;
+  color: #1c1e21;
+  background-color: $main-bg-color;
+}
+
+.header {
+  $height: 50px;
+
+  position: relative;
+  padding: 0 $global-margin;
+  height: $height;
+  line-height: $height;
+  @include mobile {
+    text-align: center;
+  }
+}
+
+.container {
+  position: relative;
+  box-sizing: border-box;
+  padding: $global-margin;
+  height: $container-height;
+  text-align: center;
+  font-size: 14px;
+  background: #fff;
+  h2 {
+    font-size: 20px;
+  }
+  p {
+    margin: 10px 0;
+  }
+  img {
+    margin: 20px 0;
+    width: 25%;
+    max-width: 300px;
+    min-width: 150px;
+    border-radius: $radius-rounded;
+    box-shadow: 2px 2px 2px 2px #0005;
+  }
+  .linked-list {
+    line-height: 32px;
+    font-size: 20px;
+    color: inherit;
+  }
+}
+
+.footer {
+  $height: 50px;
+
+  position: relative;
+  padding: 0 $global-margin;
+  height: $height;
+  line-height: $height;
+  .contact {
+    font-size: 14px;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+}

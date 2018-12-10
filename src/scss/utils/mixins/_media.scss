@@ -1,0 +1,102 @@
+/// 특정 디바이스 화면 크기 부터
+@mixin from($device) {
+  @media screen and (min-width: $device) {
+    @content; 
+  }
+}
+
+/// 특정 디바이스 화면 크기 까지
+@mixin until($device) {
+  @media screen and (max-width: $device - 1px) {
+    @content; 
+  }
+}
+
+/// 모바일 화면 까지 (landscape 기준까지)
+@mixin mobile {
+  @media screen and (max-width: $tablet - 1px) {
+    @content; 
+  }
+}
+
+/// 태블릿 화면 + 그 이상 일 경우
+@mixin tablet {
+  @media screen and (min-width: $tablet), print {
+    @content; 
+  }
+}
+
+/// 태블릿 화면일 경우
+@mixin tablet-only {
+  @media screen and (min-width: $tablet) and (max-width: $desktop - 1px) {
+    @content; 
+  }
+}
+
+/// 데스크탑 PC 크기 미만인 경우 (터치 가능한 디바이스들 인 경우)
+@mixin touch {
+  @media screen and (max-width: $desktop - 1px) {
+    @content; 
+  }
+}
+
+/// 기본 데스크탑 PC + 그 이상일 경우
+@mixin desktop {
+  @media screen and (min-width: $desktop) {
+    @content; 
+  }
+}
+
+/// 데스크탑 PC 부터 와이드 스크린 까지일 경우
+@mixin desktop-only {
+  @if $widescreen-enabled {
+    @media screen and (min-width: $desktop) and (max-width: $widescreen - 1px) {
+      @content; 
+    }
+  }
+}
+
+/// 와이드 스크린 까지일 경우
+@mixin until-widescreen {
+  @if $widescreen-enabled {
+    @media screen and (max-width: $widescreen - 1px) {
+      @content; 
+    }
+  }
+}
+
+/// 와이드 스크린 + 그 이상일 경우
+@mixin widescreen {
+  @if $widescreen-enabled {
+    @media screen and (min-width: $widescreen) {
+      @content; 
+    }
+  }
+}
+
+/// 와이드 스크린일 경우
+@mixin widescreen-only {
+  @if $widescreen-enabled {
+    @media screen and (min-width: $widescreen) and (max-width: $fullhd - 1px) {
+      @content; 
+    }
+  }
+}
+
+/// Full HD 까지일 경우
+@mixin until-fullhd {
+  @if $fullhd-enabled {
+    @media screen and (max-width: $fullhd - 1px) {
+      @content; 
+    }
+  }
+}
+
+/// Full HD + 그 이상일 경우
+@mixin fullhd {
+  @if $fullhd-enabled {
+    @media screen and (min-width: $fullhd) {
+      @content; 
+    }
+  }
+}

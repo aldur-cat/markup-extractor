@@ -1,0 +1,45 @@
+{
+  "name": "markup-extractor",
+  "version": "1.0.0",
+  "description": "마크업 정적 파일 추출기",
+  "private": true,
+  "scripts": {
+    "build": "cross-env NODE_ENV=development webpack --hide-modules --progress --mode production",
+    "dev": "cross-env NODE_ENV=production webpack-dev-server --open --progress --mode development"
+  },
+  "keywords": [
+    "markup",
+    "webpack",
+    "html",
+    "css",
+    "sass",
+    "scss"
+  ],
+  "author": "황재만",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^9.3.1",
+    "clean-webpack-plugin": "^1.0.0",
+    "copy-webpack-plugin": "^4.6.0",
+    "cross-env": "^5.2.0",
+    "css-declaration-sorter": "^4.0.1",
+    "css-loader": "^1.0.1",
+    "cssnano": "^4.1.7",
+    "file-loader": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.4",
+    "node-sass": "^4.10.0",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  },
+  "browserslist": [
+    "> 1% in KR",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}

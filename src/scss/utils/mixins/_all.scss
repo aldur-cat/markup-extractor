@@ -1,0 +1,115 @@
+@charset 'utf-8';
+
+@import './animations.scss';
+@import './icons.scss';
+@import './media.scss';
+
+/// floating 해제
+@mixin clearfix {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+/// 말줄임
+@mixin ellipsis($line-clamp: 1) {
+  @if($line-clamp == 1) {
+    display: block;
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $line-clamp;
+    -webkit-box-orient: vertical;
+  }
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/// 텍스트 숨김처리
+@mixin hidden-text {
+  position: absolute !important;
+  font-size: 0 !important;
+  visibility: hidden !important;
+}
+
+/// 덮어쓰는 레이어
+@mixin overlay($offset: 0, $z: 100, $is-flex-center: false) {
+  display: block;
+  position: fixed;
+  top: $offset;
+  right: $offset;
+  bottom: $offset;
+  left: $offset;
+  z-index: $z;
+  @if ($is-flex-center) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/// 드래그 및 텍스트 선택 막기
+@mixin unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/// position absolute
+@mixin pos-absolute ($top: 0, $right: auto, $bottom: auto, $left: 0) {
+  position: absolute;
+  @if ($top != auto) {
+    top: $top;
+  }
+  @if ($right != auto) {
+    right: $right;
+  }
+  @if ($bottom != auto) {
+    bottom: $bottom;
+  }
+  @if ($left != auto) {
+    left: $left;
+  }
+}
+
+/// 가로 스크롤
+@mixin horizontal-scroll ($type: default, $height: auto) {
+  $non-scroll-margin: 50px;
+
+  @if ($type == flex) {
+    display: flex;
+    flex-wrap: nowrap;
+    & > * {
+      flex: 0 0 auto;
+    }
+  } @else {
+    white-space: nowrap;
+    line-height: 0;
+    font-size: 0;
+    & > * {
+      display: inline-block;
+      vertical-align: top;
+      line-height: normal;
+      font-size: medium;
+    }
+  }
+  overflow: hidden;
+  overflow-x: auto;
+  margin-bottom: -$non-scroll-margin;
+  padding-bottom: $non-scroll-margin;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  &::-webkit-scrollbar {
+    display: none; 
+  }
+}
+
+/// 배경 이미지 기본 셋팅
+@mixin init-spr-bg ($spr-image-url: '', $spr-image-size: auto) {
+  background: url($spr-image-url) 999px 0 no-repeat;
+  background-size: $spr-image-size;
+}

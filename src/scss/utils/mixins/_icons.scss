@@ -1,0 +1,185 @@
+/// 아이콘 기본 랩퍼
+@mixin init-ico-wrap($dimensions) {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  color: transparent;
+  width: $dimensions;
+  height: $dimensions;
+}
+
+/// 로딩 아이콘
+@mixin ico-loader($dimensions: 24px, $border: 2px solid $border) {
+  @include init-ico-wrap($dimensions);
+  &:after {
+    content: '';
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    animation: spin-around 500ms infinite linear;
+    border: $border;
+    border-radius: $radius-rounded;
+    border-right-color: transparent;
+    border-top-color: transparent;
+  }
+}
+
+/// 화살표 아이콘
+@mixin ico-arrow($dimensions: 36px, $ico-dimensions: 25%, $line: 2px, $color: #000) {
+  @include init-ico-wrap($dimensions);
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: (-$ico-dimensions * 4 / 5) 0 0 (-$ico-dimensions / 2);
+    width: $ico-dimensions;
+    height: $ico-dimensions;
+    border: $line solid transparent;
+    border-radius: $line - 1;
+    border-right: 0;
+    border-top: 0;
+    border-color: $color;
+    transform: rotate(-45deg);
+  }
+}
+@mixin ico-arrow-down($dimensions: 36px, $ico-dimensions: 25%, $line: 2px, $color: #000) {
+  @include ico-arrow($dimensions, $ico-dimensions, $line, $color);
+}
+@mixin ico-arrow-up($dimensions: 36px, $ico-dimensions: 25%, $line: 2px, $color: #000) {
+  @include ico-arrow($dimensions, $ico-dimensions, $line, $color);
+  &::after{
+    margin-top: (-$ico-dimensions / 4);
+    transform: rotate(135deg);
+  }
+}
+@mixin ico-arrow-left($dimensions: 36px, $ico-dimensions: 25%, $line: 2px, $color: #000) {
+  @include ico-arrow($dimensions, $ico-dimensions, $line, $color);
+  &::after{
+    margin: (-$ico-dimensions / 2) 0 0 (-$ico-dimensions / 4);
+    transform: rotate(45deg);
+  }
+}
+@mixin ico-arrow-right($dimensions: 36px, $ico-dimensions: 25%, $line: 2px, $color: #000) {
+  @include ico-arrow($dimensions, $ico-dimensions, $line, $color);
+  &::after{
+    margin: (-$ico-dimensions / 2) 0 0 (-$ico-dimensions * 4 / 5);
+    transform: rotate(-135deg);
+  }
+}
+
+/// 뒤로가기 아이콘
+@mixin ico-go-back($dimensions: 36px, $ico-dimensions: 40%, $line: 2px, $color: #000) {
+  @include ico-arrow-left($dimensions, $ico-dimensions, $line, $color);
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 0 0 0 -29%;
+    width: $ico-dimensions;
+    height: $line;
+    border-radius: $line - 1;
+    background-color: $color;
+  }
+  &::after {
+    margin: -13% 0 0 -25%;
+    transform: rotate(45deg)
+  }
+}
+
+/// 햄버거 아이콘
+@mixin ico-hamburger($dimensions: 48px, $color: #000) {
+  @include init-ico-wrap($dimensions);
+  span {
+    background-color: $color;
+    display: block;
+    position: absolute;
+    left: calc(50% - (#{$dimensions} / 4));
+    width: $dimensions / 2;
+    @if ($dimensions / 16 < 1) {
+      height: $dimensions / 16;
+    } @else {
+      height: floor($dimensions / 16);
+    };
+    transform-origin: center;
+    transition-duration: $speed;
+    transition-property: background-color, opacity, transform;
+    transition-timing-function: $easing;
+    &:nth-child(1) {
+      top: calc(50% - (#{$dimensions} / 6) - 1px);
+    }
+    &:nth-child(2) {
+      top: calc(50% - 1px);
+    }
+    &:nth-child(3) {
+      top: calc(50% + (#{$dimensions} / 6) - 1px);
+    }
+  }
+  &:hover {
+    background-color: rgba(black, 0.05);
+  }
+  // Modifers
+  &.is-active {
+    span {
+      &:nth-child(1) {
+        transform: translateY(5px) rotate(45deg);
+      }
+      &:nth-child(2) {
+        opacity: 0;
+      }
+      &:nth-child(3) {
+        transform: translateY(-5px) rotate(-45deg);
+      }
+    }
+  }
+}
+
+/// 닫기 아이콘
+@mixin ico-close($dimensions: 48px, $ico-dimensions: 80%, $line: 2px, $color: #000) {
+  @include init-ico-wrap($dimensions);
+  &::before, &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -$ico-dimensions / 2;
+    width: $ico-dimensions;
+    height: $line;
+    background: $color;
+  }
+  &::before {
+    transform: rotate(45deg)
+  }
+  &::after {
+    transform: rotate(-45deg)
+  }
+}
+
+/// 채워진 화살표
+@mixin ico-arrow-full($direction: down, $boder-size: 3px, $color: #000) {
+  width: 0px;
+  height: 0px;
+  border: $boder-size solid;
+  border-color: $color $color transparent transparent;
+  @if ($direction == up) {
+    margin-top: -$boder-size / 2;
+    transform: rotate(-45deg);
+  } @else if ($direction == right) {
+    margin-top: -$boder-size;
+    margin-right: $boder-size / 2;
+    transform: rotate(45deg);
+  } @else if ($direction == down) {
+    margin-top: -$boder-size * 3 / 2;
+    transform: rotate(135deg);
+  } @else if ($direction == left) {
+    margin-top: -$boder-size;
+    margin-right: -$boder-size / 2;
+    transform: rotate(-135deg);
+  };
+}
