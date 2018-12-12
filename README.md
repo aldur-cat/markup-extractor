@@ -36,7 +36,7 @@ html-webpack-plugin을 통해 템플릿 html파일을 관리하나 프런트개�
 - 테섭구동 및 번들과정에 기본적으로 필요한 두줄의 lodash 템플릿 표현식이(<% %>) 들어가는데 이는 기본 구성 그대로 두시면 됩니다.
 
 ```html
-<% const { injectTags } = require('./config/html-template-variable.config.js')(htmlWebpackPlugin); %>
+<% const { injectTags } = require('~/config/html-template-variable.config.js')(htmlWebpackPlugin); %>
 <!DOCTYPE  html>
 <html  lang="ko">
 <head>
@@ -66,14 +66,14 @@ entry: {
 // config/html-webpack-plugin.config.js
 HtmlWebpackPluginList: [
 	new  HtmlWebpackPlugin({
-		filename:  '추출될html파일명1.html',	// filename과 template는 동일명으로 해 주세요.
-		template:  '템플릿으로활용할html파일명2.html',
-		chunks: ['포함시킬css entry명1', '포함시킬css entry명2'],
+		filename:  '(추출될 html) 파일명1.html',	// filename과 template는 동일명으로 해 주세요.
+		template:  '(템플릿으로 활용할 html) 파일명1.html',
+		chunks: ['포함시킬 css entry명1', '포함시킬 css entry명2'],
 		inject:  false
 	}),
 	new  HtmlWebpackPlugin({
-		filename:  '추출될html파일명2.html',
-		template:  '템플릿으로활용할html파일명2.html',
+		filename:  '(추출될 html) 파일명2.html',
+		template:  '(템플릿으로 활용할 html) 파일명2.html',
 		chunks: ['포함시킬css entry명'],
 		inject:  false
 	})
@@ -92,13 +92,13 @@ npm run dev
 npm run build
 ```
 
-- \_\_markup-result\_\_ 폴더가 생성되는데 해당 하위 파일들이 정적 파일 결과물이며 server 구동없이 화면 동작이잘 되는지를 확인하고 개발자에게 전달해주시면 됩니다.
-- 빌드과정을 실행시키면 기존에 생성되었던 \_\_markup-result\_\_ 폴더는 제거되었다가 빌드과정 완료 후 다시 생성되므로 해당 폴더 하위의 내용을 직접 수정하고 저장한 경우는 유의바랍니다.
+- **\_\_markup-result\_\_** 폴더가 생성되는데 해당 하위 파일들이 정적 파일 결과물이며 server 구동없이 화면 동작이 잘 되는지를 확인하고 개발자에게 전달해주시면 됩니다.
+- 빌드과정을 실행시키면 기존에 생성되었던 **\_\_markup-result\_\_** 폴더는 제거되었다가 빌드과정 완료 후 다시 생성되므로 해당 폴더 하위의 내용을 직접 수정하고 저장한 경우는 유의바랍니다.
 
 ## 기타 
 - 빌드 시 js-dev 폴더도 root에 생깁니다만 무시하시면 됩니다. 원래 번들된 결과물 js이나 css관련 파일만 뽑아서 추출하기에 최종 프런트 결과물이 아닌 곳에서 번들된 js는 의미가 없어 포함시키지 않았습니다.
 - js 샘플 코드 및 vendor 라이브러리 등은 static 파일에 올려두어 번들 결과 폴더로 복제되어 추가됩니다.
-- html 템플릿에서 assets로 활용되는 파일들의 온전한 참조를위해 url을 템플릿 표현식으로 구현해주세요.
+- html 템플릿에서 assets로 활용되는 파일들의 온전한 참조를위해 경로를 템플릿 표현식(lodash)으로 구현해주세요.
 
 ```html
 <!-- static 폴더에 추가하여 파일 그대로 복제되어 들어갈 소스인 경우 -->
@@ -107,5 +107,5 @@ npm run build
 
 ```html
 <!-- 웹팩 번들 과정을 태울 소스일 경우 -->
-<img src="<%= require('./src/images/img_profile.jpg') %>" alt="프로필이미지">
+<img src="<%= require('./images/img_profile.jpg') %>" alt="프로필이미지">
 ```
