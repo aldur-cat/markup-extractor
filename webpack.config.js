@@ -140,6 +140,9 @@ module.exports = (env, options) => {
         '~': projectBasePath,
       }
     },
+    devServer: {
+      openPage: 'src/'
+    }
   }
   return config;
 }
