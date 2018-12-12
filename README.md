@@ -31,12 +31,39 @@ html-webpack-plugin을 통해 템플릿 html파일을 관리하나 프런트개�
 추출되어 나오는 결과물은 마크업 정적 페이지입니다.
 
 ## 작업 예시
-- 전처리 처리를 원하는 (SA/SC/C)SS 파일을 scss폴더에 생성합니다.  (경로 수정가능)
-- 프로젝트 root 폴더에 템플릿으로 활용할 html파일을 구성합니다. (추출될 html 파일명과 동일)
-- 테섭구동 및 번들과정에 기본적으로 필요한 두줄의 lodash 템플릿 표현식이(<% %>) 들어가는데 이는 기본 구성 그대로 두시면 됩니다.
+- 전처리 처리를 원하는 (SA/SC/C)SS 파일을 src하위의 scss폴더에 생성합니다. (경로 수정가능)
+- 템플릿으로 활용할 html파일을 구성합니다. (추출될 html 파일명과 동일)
+- 폴더의 상대주소로 번들처리가 되오니 추출될 폴더 구조에 맞게 src 폴더 하위도 구성하시는걸 권장드립니다.
+
+- 원하는 결과물의 폴더 구조
+
+```bash
+├── css
+│   ├── sample1.css
+│   └── sample2.css
+├── images
+├── js
+├── page1.html
+└── page2.html
+```
+
+- 설정할 작업 폴더 구조
+
+```bash
+├── src
+│   ├── scss
+│   │   ├── sample1.scss
+│   │   └── sample2.scss
+│   ├── images
+│   ├── page1.html
+│   └── page2.html
+└── static
+    └── js
+```
+
+- 테섭구동 및 번들과정에 기본적으로 필요한 한줄의 lodash 템플릿 표현식이(<% %>) 들어가는데 이는 기본 구성 그대로 두시면 됩니다.
 
 ```html
-<% const { injectTags } = require('~/config/html-template-variable.config.js')(htmlWebpackPlugin); %>
 <!DOCTYPE  html>
 <html  lang="ko">
 <head>
@@ -44,7 +71,7 @@ html-webpack-plugin을 통해 템플릿 html파일을 관리하나 프런트개�
 <meta  name="viewport"  content="width=device-width, initial-scale=1.0">
 <meta  http-equiv="X-UA-Compatible"  content="ie=edge">
 <title>타이틀</title>
-<%= injectTags %>
+<%= require('~/config/html-template-variable.config.js')(htmlWebpackPlugin).injectTags %>	<!-- 환경에 따라 css link태그를 붙여주는 역할 -->
 </head>
 <body>
 <!-- 본문 마크업 진행 -->
@@ -56,14 +83,17 @@ html-webpack-plugin을 통해 템플릿 html파일을 관리하나 프런트개�
 
 ```javascript
 // webpack.config.js
+...
 entry: {
 	'추출될css파일명1':  path.resolve(assetsBasePath, 'scss','포함시킬(SA/SC/C)SS파일명'.(sa/sc/c)ss),
 	'추출될css파일명2':  path.resolve(assetsBasePath, 'scss','포함시킬(SA/SC/C)SS파일명'.(sa/sc/c)ss),
 }
+...
 ```
 
 ```javascript
 // config/html-webpack-plugin.config.js
+...
 HtmlWebpackPluginList: [
 	new  HtmlWebpackPlugin({
 		filename:  '(추출될 html) 파일명1.html',	// filename과 template는 동일명으로 해 주세요.
@@ -78,6 +108,7 @@ HtmlWebpackPluginList: [
 		inject:  false
 	})
 ]
+...
 ```
 
 - 웹팩 테스트서버를 통해 업무를 진행 합니다.
