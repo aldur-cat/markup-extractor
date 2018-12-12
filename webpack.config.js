@@ -2,7 +2,6 @@
  * 모듈 import
  */
 const path = require('path');
-const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { HtmlWebpackPluginList } = require('./config/html-webpack-plugin.config.js');
@@ -28,14 +27,13 @@ module.exports = (env, options) => {
   const isDevEnv = options.mode !== 'production';
   const config = {
     mode: 'none',
-    devtool: 'cheap-module-eval-source-map',
     entry: {
       'sample': path.resolve(assetsBasePath, 'scss','sample.scss')
     },
     output: {
       path: outputBasePath,
-      filename: isDevEnv ? `./js-dev/[name].js` : `../js-dev/[name].js`,
-      publicPath: isDevEnv ? '/' : ''
+      filename: isDevEnv ? `./${BUNDLE_SCRIPT_FOLDER}/[name].js` : `../${BUNDLE_SCRIPT_FOLDER}/[name].js`,
+      publicPath: isDevEnv ? '/src/' : ''
     },
     plugins: [
       !isDevEnv ? new CleanWebpackPlugin([
@@ -98,7 +96,8 @@ module.exports = (env, options) => {
               loader: 'url-loader',
               options: {
                 name: '[name].[ext]?[hash:7]',
-                outputPath: 'images/',
+                useRelativePath: true,
+                outputPath: '',
                 limit: 10000
               }
             }
@@ -111,7 +110,8 @@ module.exports = (env, options) => {
               loader: 'url-loader',
               options: {
                 name: '[name].[ext]?[hash:7]',
-                outputPath: 'media/',
+                useRelativePath: true,
+                outputPath: '',
                 limit: 10000
               }
             }
@@ -124,14 +124,22 @@ module.exports = (env, options) => {
               loader: 'url-loader',
               options: {
                 name: '[name].[ext]?[hash:7]',
-                outputPath: 'fonts/',
+                useRelativePath: true,
+                outputPath: '',
                 limit: 10000
               }
             }
           ]
         }
       ]
-    }
+    },
+    resolve: {
+      extensions: ['.js', '.json'],
+      alias: {
+        '@': assetsBasePath,
+        '~': projectBasePath,
+      }
+    },
   }
   return config;
 }
