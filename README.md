@@ -1,34 +1,34 @@
 # markup-extractor
 markup 정적 결과물을 추출해주는 NPM기반의 framework
   
-## install
+## Install
 
 ```bash
 npm i
 ```
 
-## run dev
+## Run Dev Server
 
 ```bash
 npm run dev
 ```
 
-## extract markup files
+## Extract Markup Files
 
 ```bash
 npm run build
 ```
 
 ## Description
-마크업 추출기는 하드코딩하는 CSS 파일을 패키지형태로 관리&추출 해주는 마크업 프레임워크입니다.
+마크업 추출기는 하드코딩하는 HTML, CSS, JS 및 Assets 파일들을 패키지형태로 관리&추출 해주는 마크업 프레임워크입니다. 
 하드코딩하여 마크업 프로젝트를 관리하고 구성하고 있다면 활용해보세요.
 
-(SA/SC/C)SS를 지원하며 postcss기능을 통해 autoprefix, cssnano, css-declaration-sorter등의 기능을 사용할 수 있습니다.
-html-webpack-plugin을 통해 템플릿 html파일을 관리하나 프런트개발에 익숙치 않은 웹퍼블리셔를 위해 템플릿 언어의 사용은 최소화 하도록 구성되어있습니다.
+(SA/SC/C)SS를 지원하며 postcss기능을 통해 autoprefix, cssnano, css-declaration-sorter등의 기능을 사용할 수 있습니다. 
+html-webpack-plugin을 통해 템플릿 html파일을 관리하나 프런트개발에 익숙치 않은 웹퍼블리셔를 위해 템플릿 언어의 사용은 최소화 하도록 구성되어있습니다. 
 
-필요한 추가 패키지 구성하여 입맛에 맞게 변경해 사용하시면 됩니다.
+필요한 추가 패키지 구성하여 입맛에 맞게 변경해 사용하시면 됩니다. 
 
-추출되어 나오는 결과물은 마크업 정적 페이지입니다.
+추출되어 나오는 결과물은 마크업 정적 페이지입니다. 
 
 ## 작업 예시
 - 전처리 처리를 원하는 (SA/SC/C)SS 파일을 src하위의 scss폴더에 생성합니다. (경로 수정가능)
@@ -127,7 +127,7 @@ npm run build
 - 빌드과정을 실행시키면 기존에 생성되었던 **\_\_markup-result\_\_** 폴더는 제거되었다가 빌드과정 완료 후 다시 생성되므로 해당 폴더 하위의 내용을 직접 수정하고 저장한 경우는 유의바랍니다.
 
 ## 기타 
-- 빌드 시 js-dev 폴더도 root에 생깁니다만 무시하시면 됩니다. 원래 번들된 결과물 js이나 css관련 파일만 뽑아서 추출하기에 최종 프런트 결과물이 아닌 곳에서 번들된 js는 의미가 없어 포함시키지 않았습니다.
+- 빌드 시 js-dev 폴더도 root에 생깁니다만 무시하셔도 됩니다. 원래 번들된 결과물의 js 코드입니다만 그 중 css 파일만을 추출하기에 사용하지 않습니다. 최종 프런트 결과물이 아니기에 번들된 js는 의미가 없어 포함시키지 않았습니다.
 - js 샘플 코드 및 vendor 라이브러리 등은 static 파일에 올려두어 번들 결과 폴더로 복제되어 추가됩니다.
 - html 템플릿에서 assets로 활용되는 파일들의 온전한 참조를위해 경로를 템플릿 표현식(lodash)으로 구현해주세요.
 

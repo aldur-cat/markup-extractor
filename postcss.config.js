@@ -3,7 +3,6 @@ module.exports = {
     'cssnano': {
       preset: ['default', {
         discardComments: false,
-        minifyFontValues: false,
         normalizeWhitespace: false
       }]
     },
