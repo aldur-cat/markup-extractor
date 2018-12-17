@@ -4,8 +4,8 @@
   "description": "마크업 정적 파일 추출기",
   "private": true,
   "scripts": {
-    "build": "cross-env NODE_ENV=development webpack --hide-modules --progress --mode production",
-    "dev": "cross-env NODE_ENV=production webpack-dev-server --open --progress --mode development"
+    "build": "cross-env NODE_ENV=production webpack --hide-modules --progress --mode production",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --progress --mode development"
   },
   "keywords": [
     "markup",
