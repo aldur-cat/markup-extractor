@@ -33,7 +33,7 @@ body {
   position: relative;
   box-sizing: border-box;
   padding: $global-margin;
-  height: $container-height;
+  min-height: $container-height;
   text-align: center;
   font-size: 14px;
   background: #fff;
