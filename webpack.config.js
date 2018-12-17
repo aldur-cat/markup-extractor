@@ -1,6 +1,7 @@
 /**
  * 모듈 import
  */
+const fs = require('fs');
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -22,6 +23,7 @@ const BUNDLE_SCRIPT_FOLDER = 'js-dev';
 const projectBasePath = path.resolve(__dirname, PROJECT_FOLDER);
 const outputBasePath = path.resolve(projectBasePath, BUNDLE_OUTPUT_FOLDER);
 const assetsBasePath = path.resolve(projectBasePath, ASSETS_FOLDER);
+const staticBasePath = path.resolve(projectBasePath, STATIC_COPY_FOLDER)
 
 module.exports = (env, options) => {
   const isDevEnv = options.mode !== 'production';
@@ -40,13 +42,13 @@ module.exports = (env, options) => {
         BUNDLE_OUTPUT_FOLDER, 
         BUNDLE_SCRIPT_FOLDER
       ]) : new CleanWebpackPlugin([]),
-      new CopyWebpackPlugin([
+      fs.existsSync(staticBasePath) ? new CopyWebpackPlugin([
         {
-          from: path.resolve(__dirname, STATIC_COPY_FOLDER),
-          to: path.resolve(__dirname, BUNDLE_OUTPUT_FOLDER),
+          from: staticBasePath,
+          to: outputBasePath,
           ignore: ['.*']
         }
-      ]),
+      ]) : new CopyWebpackPlugin([]),
       new MiniCssExtractPlugin({
         filename: './css/[name].css', 
         chunkFilename: './css/[id].css'
