@@ -23,13 +23,14 @@ const BUNDLE_SCRIPT_FOLDER = 'js-dev';
 const projectBasePath = path.resolve(__dirname, PROJECT_FOLDER);
 const outputBasePath = path.resolve(projectBasePath, BUNDLE_OUTPUT_FOLDER);
 const assetsBasePath = path.resolve(projectBasePath, ASSETS_FOLDER);
-const staticBasePath = path.resolve(projectBasePath, STATIC_COPY_FOLDER)
+const staticBasePath = path.resolve(projectBasePath, STATIC_COPY_FOLDER);
 
 module.exports = (env, options) => {
   const isDevEnv = options.mode !== 'production';
   const config = {
     mode: 'none',
     entry: {
+      'common': path.resolve(assetsBasePath, 'scss','common.scss'),
       'sample': path.resolve(assetsBasePath, 'scss','sample.scss')
     },
     output: {

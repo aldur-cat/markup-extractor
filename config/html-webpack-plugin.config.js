@@ -5,7 +5,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'sample.html',
       template: 'src/sample.html',
-      chunks: ['sample'],
+      chunks: ['common', 'sample'],
       inject: false
     })
   ]
