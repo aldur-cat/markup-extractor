@@ -1,7 +1,7 @@
 module.exports = (htmlWebpackPlugin) => {
   const arrChunkNames = htmlWebpackPlugin.options.chunks;
   const isDevEnv = process.env.NODE_ENV !== 'production';
-  let injectTags = ``
+  let injectTags = ``;
 
   if (!htmlWebpackPlugin.options.inject) {
     for (const i in arrChunkNames) {

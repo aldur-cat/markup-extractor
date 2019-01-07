@@ -3,9 +3,6 @@
 /// util 기능 활용
 @import './utils/all';
 
-/// 기본 설정
-@import './base/all';
-
 $header-height: 50px;
 $footer-height: 50px;
 $container-height: calc(100vh - #{$header-height} - #{$footer-height});
