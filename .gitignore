@@ -64,3 +64,6 @@ typings/
 ### 추가
 .vscode
 js-dev
+
+# auto generate image sprite smith
+sprite/
