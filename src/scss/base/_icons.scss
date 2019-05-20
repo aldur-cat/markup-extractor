@@ -1,0 +1,23 @@
+@charset 'utf-8';
+
+@import '../scss/sprite/spr-icons';
+
+.base-icon {
+  display: inline-block;
+  overflow: hidden;
+  color: transparent;
+
+  $icons: (
+    'octocat': $octocat,
+    'octocat-hover': $octocat-hover,
+  );
+  @each $icon-name, $icon in $icons {
+    &--#{$icon-name} {
+      @include sprite($icon);
+    }
+  }
+
+  &--octocat:hover {
+    @include sprite($octocat-hover);
+  }
+}

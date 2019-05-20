@@ -139,4 +139,5 @@ npm run build
 ```html
 <!-- 웹팩 번들 과정을 태울 소스일 경우 -->
 <img src="<%= require('./images/img_profile.jpg') %>" alt="프로필이미지">
+<img src="${ require('./images/img_profile.jpg') }" alt="프로필이미지">
 ```
