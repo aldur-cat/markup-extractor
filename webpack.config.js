@@ -18,7 +18,7 @@ const SpritesmithPlugin = require('webpack-spritesmith');
  * 프로젝트 각종 폴더 경로 설정
  */
 const PROJECT_FOLDER = '';
-const BUNDLE_OUTPUT_FOLDER = '__markup-result__';
+const BUNDLE_OUTPUT_FOLDER = 'public';
 const ASSETS_FOLDER = 'src';
 const STATIC_COPY_FOLDER = 'static';
 const BUNDLE_SCRIPT_FOLDER = 'js-dev';
