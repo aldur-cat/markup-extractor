@@ -7,12 +7,18 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { HtmlWebpackPluginList } = require('./config/html-webpack-plugin.config.js');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ImageminPlugin = require('imagemin-webpack');
+const imageminGifsicle = require('imagemin-gifsicle');
+const imageminJpegtran = require('imagemin-jpegtran');
+const imageminOptipng = require('imagemin-optipng');
+const imageminSvgo = require('imagemin-svgo');
+const SpritesmithPlugin = require('webpack-spritesmith');
 
 /**
  * 프로젝트 각종 폴더 경로 설정
  */
 const PROJECT_FOLDER = '';
-const BUNDLE_OUTPUT_FOLDER = '__markup-result__';
+const BUNDLE_OUTPUT_FOLDER = 'public';
 const ASSETS_FOLDER = 'src';
 const STATIC_COPY_FOLDER = 'static';
 const BUNDLE_SCRIPT_FOLDER = 'js-dev';
@@ -24,6 +30,24 @@ const projectBasePath = path.resolve(__dirname, PROJECT_FOLDER);
 const outputBasePath = path.resolve(projectBasePath, BUNDLE_OUTPUT_FOLDER);
 const assetsBasePath = path.resolve(projectBasePath, ASSETS_FOLDER);
 const staticBasePath = path.resolve(projectBasePath, STATIC_COPY_FOLDER);
+
+const makeSprite = name =>
+  new SpritesmithPlugin({
+    src: {
+      cwd: path.resolve(assetsBasePath, `./images/spr-${name}`),
+      glob: '*.png'
+    },
+    target: {
+      image: path.resolve(assetsBasePath, `./images/sprite/spr-${name}.png`),
+      css: path.resolve(assetsBasePath, `./scss/sprite/spr-${name}.scss`)
+    },
+    apiOptions: {
+      cssImageRef: `~@/images/sprite/spr-${name}.png`
+    },
+    spritesmithOptions: {
+      padding: 2
+    }
+  });
 
 module.exports = (env, options) => {
   const isDevEnv = options.mode !== 'production';
@@ -54,7 +78,29 @@ module.exports = (env, options) => {
         filename: './css/[name].css', 
         chunkFilename: './css/[id].css'
       }),
-      ...HtmlWebpackPluginList
+      ...HtmlWebpackPluginList,
+      makeSprite('icons'),
+      new ImageminPlugin({
+        bail: false,
+        cache: true,
+        name: '[path][name].[ext]',
+        imageminOptions: {
+          plugins: [
+            imageminGifsicle({
+              interlaced: true
+            }),
+            imageminJpegtran({
+              progressive: true
+            }),
+            imageminOptipng({
+              optimizationLevel: 5
+            }),
+            imageminSvgo({
+              removeViewBox: true
+            })
+          ]
+        }
+      })
     ],
     module: {
       rules: [
